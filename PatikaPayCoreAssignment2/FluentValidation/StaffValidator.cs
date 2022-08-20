@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using FluentValidation.AspNetCore;
 using PatikaPayCoreAssignment2.Entity;
 
 namespace PatikaPayCoreAssignment2.FluentValidation

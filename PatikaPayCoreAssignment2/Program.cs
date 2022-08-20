@@ -1,3 +1,8 @@
+using FluentValidation;
+using FluentValidation.AspNetCore;
+using PatikaPayCoreAssignment2.Entity;
+using PatikaPayCoreAssignment2.FluentValidation;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +11,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddScoped<IValidator<Staff>, StaffValidator>();
 
 var app = builder.Build();
 

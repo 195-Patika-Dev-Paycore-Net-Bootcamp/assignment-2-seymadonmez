@@ -1,4 +1,5 @@
-﻿using FluentValidation.Results;
+﻿using FluentValidation;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PatikaPayCoreAssignment2.Entity;
@@ -11,12 +12,14 @@ namespace PatikaPayCoreAssignment2.Controllers
     [ApiController]
     public class StaffController : ControllerBase
     {
-        StaffValidator staffValidator = new StaffValidator();
+        //StaffValidator staffValidator = new StaffValidator();
+        private IValidator<Staff> _validator;
 
         private static List<Staff> _staffList;
 
-        public StaffController()
+        public StaffController(IValidator<Staff> validator)
         {
+            _validator = validator;
             _staffList = new List<Staff>();
 
             Staff staff1= new Staff
@@ -56,11 +59,11 @@ namespace PatikaPayCoreAssignment2.Controllers
 
 
         [HttpPost("AddStaff")]
-        public IActionResult AddStaff([FromBody] Staff request)
+        public async Task<IActionResult> AddStaffAsync([FromBody] Staff request)
         {
-            ValidationResult result = staffValidator.Validate(request);
+            ValidationResult result = await _validator.ValidateAsync(request);
 
-            if (ModelState.IsValid)
+            if (result.IsValid)
             {
                 _staffList.Add(request);
                 return Ok();
