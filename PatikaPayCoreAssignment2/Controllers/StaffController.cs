@@ -61,9 +61,14 @@ namespace PatikaPayCoreAssignment2.Controllers
 
         // Staff türünde yeni bir eleman eklemeye yarayan metod
         [HttpPost("AddStaff")]
-        public async Task<IActionResult> AddStaffAsync([FromBody] Staff request)
+        public  IActionResult AddStaff([FromBody] Staff request)
         {
-            ValidationResult result = await _validator.ValidateAsync(request);
+            ValidationResult result = _validator.Validate(request);
+            //ValidationResult result = await _validator.ValidateAsync(request);
+            //StaffValidator staffValidator = new StaffValidator();
+            //ValidationResult result = staffValidator.Validate(request);
+
+
 
             if (result.IsValid)
             {
