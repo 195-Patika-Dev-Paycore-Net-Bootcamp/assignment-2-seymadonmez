@@ -12,7 +12,6 @@ namespace PatikaPayCoreAssignment2.Controllers
     [ApiController]
     public class StaffController : ControllerBase
     {
-        //StaffValidator staffValidator = new StaffValidator();
         
         private IValidator<Staff> _validator;
 
@@ -64,11 +63,6 @@ namespace PatikaPayCoreAssignment2.Controllers
         public  IActionResult AddStaff([FromBody] Staff request)
         {
             ValidationResult result = _validator.Validate(request);
-            //ValidationResult result = await _validator.ValidateAsync(request);
-            //StaffValidator staffValidator = new StaffValidator();
-            //ValidationResult result = staffValidator.Validate(request);
-
-
 
             if (result.IsValid)
             {
