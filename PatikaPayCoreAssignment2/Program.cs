@@ -13,6 +13,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IValidator<Staff>, StaffValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<StaffValidator>();
 
 var app = builder.Build();
 

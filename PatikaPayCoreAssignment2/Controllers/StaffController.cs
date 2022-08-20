@@ -13,6 +13,7 @@ namespace PatikaPayCoreAssignment2.Controllers
     public class StaffController : ControllerBase
     {
         //StaffValidator staffValidator = new StaffValidator();
+        
         private IValidator<Staff> _validator;
 
         private static List<Staff> _staffList;
@@ -45,10 +46,11 @@ namespace PatikaPayCoreAssignment2.Controllers
             };
             _staffList.Add(staff1);
             _staffList.Add(staff2);
-            _staffList.Add(new Staff { Id = 3, Name = "Aylin", LastName = "Sezgin", DateOfBirth = new DateTime(1999, 08, 19), Email = "aylin@aylin.com", PhoneNumber = "905554443322", Salary = 5500 });
+            _staffList.Add(new Staff { Id = 3, Name = "Aylin", LastName = "Sezgin", DateOfBirth = new DateTime(1999, 08, 19), Email = "aylin@aylin.com", PhoneNumber = "+905554443322", Salary = 5500 });
         }
 
 
+        // Staff listesindeki tüm elemanları getiren metod
         [HttpGet("GetAll")]
         public List<Staff> GetAll()
         {
@@ -57,7 +59,7 @@ namespace PatikaPayCoreAssignment2.Controllers
         }
 
 
-
+        // Staff türünde yeni bir eleman eklemeye yarayan metod
         [HttpPost("AddStaff")]
         public async Task<IActionResult> AddStaffAsync([FromBody] Staff request)
         {
@@ -72,6 +74,7 @@ namespace PatikaPayCoreAssignment2.Controllers
             else return BadRequest();
         }
 
+        // Girilen id değerine karşılık olan staff nesnesini getiren metod
         [HttpGet("GetById/{id}")]
         public ActionResult<Staff> GetById(int id)
         {
@@ -86,6 +89,7 @@ namespace PatikaPayCoreAssignment2.Controllers
             return staff;
         }
 
+        //Girilen id değerine karşılık olan staff nesnesini güncelleyen metod
         [HttpPut("UpdateStaff")]
         public IActionResult UpdateStaff([FromBody] Staff updatedStaff, int id)
         {
@@ -106,6 +110,7 @@ namespace PatikaPayCoreAssignment2.Controllers
             }
         }
 
+        // Girilen id değerine karşılık olan staff nesnesini silen metod
         [HttpDelete]
         [Route("Delete")]
         public IActionResult Delete([FromBody] int id)

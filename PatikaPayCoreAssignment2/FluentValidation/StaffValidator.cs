@@ -4,6 +4,7 @@ using PatikaPayCoreAssignment2.Entity;
 
 namespace PatikaPayCoreAssignment2.FluentValidation
 {
+    //Staff nesnesine ait doğrulama sınıfı
     public class StaffValidator: AbstractValidator<Staff>
     {
         public StaffValidator()
@@ -13,13 +14,15 @@ namespace PatikaPayCoreAssignment2.FluentValidation
 
             RuleFor(s => s.Name).NotEmpty().MaximumLength(5).MinimumLength(250);
 
-            RuleFor(s => s.LastName).NotEmpty().MaximumLength(20).MinimumLength(250);
+            RuleFor(s => s.LastName).NotEmpty().MaximumLength(5).MinimumLength(250);
 
-            RuleFor(s => s.Email).NotEmpty().EmailAddress().Matches(@"^[a-zA-Z\.@]{2,100}$");
+            RuleFor(s => s.Email).NotEmpty().EmailAddress().Matches(@"^[a-zA-Z\.@]{5,250}$");
 
-            //RuleFor(s => s.DateOfBirth).NotEmpty().InclusiveBetween(new(1945, 11, 11), new(2002, 10, 10));
+            RuleFor(s => s.DateOfBirth).NotEmpty().InclusiveBetween(new(1945, 11, 11), new(2002, 10, 10));
 
-            //RuleFor(s => s.PhoneNumber).NotEmpty().Matches(@"^[\+]?90[\p{L}\p{N}]+$");
+            RuleFor(s => s.PhoneNumber).Matches(@"^[\+]?90[\p{L}\p{N}]+$");
+            RuleFor(s => s.Salary).NotEmpty().GreaterThan(2000).LessThan(9000);
+
         }
     }
 }
